@@ -405,10 +405,12 @@ function handle_HT_uniformMiddle(ht, uniform_middle, end) {
         // HT ....(all same)... TT
         if (end == "TT") { // HT TTT TT
             console.log("change H to T flip (1) coin")
+            console.log(1)
             return 1;
         }
         if (end == "TH") { // HT TTT TH
             console.log("change Hs to Ts flip (2) coin")
+            console.log(2)
             return 2;
         }
         if (end == "HH" || end == "HT") { // HT TTT HH
@@ -420,7 +422,27 @@ function handle_HT_uniformMiddle(ht, uniform_middle, end) {
 
     } else
     if (middle_T == false) { // middle chars are Hs
-        console.log("Hs: ", middle_T)
+        console.log("Hs: ", !middle_T)
+        if (end == "TT") { // HT HHH TT
+            console.log("flip(1) First T to H")
+            console.log(1)
+            return 1;
+        }
+        if (end == "TH") { // HT HH TH
+            console.log("flip(2) both Ts to H")
+            console.log(2)
+            return 2;
+        }
+        if (end == "HH") { // HT HHH HH 
+            console.log("flip(1) T to H")
+            console.log(1)
+            return 1;
+        }
+        if (end == "TT") { // HT HHH TT
+            console.log("flip(1) first T to H")
+            console.log(1)
+            return 1;
+        }
     }
     // HT ....(all same)... TT
     // HT ....(all same)... TH
@@ -544,6 +566,24 @@ main2("THHHHHHHHTT") // first two TH and with middle TTTs... and with end == TT
 console.log("======== test case end ========")
 
 
-// FIRST TWO as HT and With MIDDLE Ws... 
+// FIRST TWO as HT and With MIDDLE Ts... 
 console.warn("**** FIRST TWO as HT and With MIDDLE Ts...  ****")
-main2("HTTTTTTHT") // first two HT
+main2("HTTTTTTHT") // first two HT and with middle Ts and end == TH
+console.log("======== test case end ========")
+main2("HTTTTTTHT") // first two HT and with middle Ts and end == HT
+console.log("======== test case end ========")
+main2("HTTTTTTTT") // first two HT and with middle Ts and end == TT
+console.log("======== test case end ========")
+main2("HTTTTTTHH") // first two HT and with middle Ts and end == HH
+console.log("======== test case end ========")
+
+// FIRST TWO as HT and With MIDDLE Hs... 
+console.warn("**** FIRST TWO as HT and With MIDDLE Hs...  ****")
+main2("HTHHHHHHT") // first two HT and with middle Hs and end == HT
+console.log("======== test case end ========")
+main2("HTHHHHHTH") // first two HT and with middle Hs and end == TH
+console.log("======== test case end ========")
+main2("HTHHHHHTT") // first two HT and with middle Hs and end == TT
+console.log("======== test case end ========")
+main2("HTHHHHHHH") // first two HT and with middle Hs and end == HH
+console.log("======== test case end ========")

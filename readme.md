@@ -23,6 +23,7 @@ Given nth number of coins, to be considered a "Beautiful Combination" a set of c
 2. Starts with two Heads (HH) and ends with two Tails (TT), and in between should have repeated Ts and repeated Hs wherein Hs comes before Ts, example:
     - HHTTTT
     - HHHHHHHHTT
+    - HHHHHTTTTTTT
 
 Now, the challenge.  Whats is the least amount of flip to make a set (combination of coins) a Beautiful Combination.
 

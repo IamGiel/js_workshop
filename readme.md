@@ -2,13 +2,13 @@
 
 ## Backstory: 
 
-## I tried this coding challenge at HackerRank: [Here](https://www.hackerrank.com)
+I tried this coding challenge at HackerRank: [Here](https://www.hackerrank.com)
 
-## Needless to say I ran out of time, given other priorities.
-## I am trying to complete this in javascript.
-## I would like to finish this in my own time for coding practice and nothing more.
+Needless to say I ran out of time, given other priorities.
+I am trying to complete this in javascript.
+I would like to finish this in my own time for coding practice and nothing more.
 
-## If you have alternative solution - please PR.  I would love to see how you approached it.
+If you have alternative solution - please PR.  I would love to see how you approached it.
 
 ## Instruction: 
 

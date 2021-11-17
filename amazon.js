@@ -497,14 +497,31 @@ function allsame(s) {
 }
 
 // run test
-main2("THTHH") // first two TH and with middle TTTs... and with end == TH
-console.log("======== BREAK ========")
-main2("THTTTHT") // first two TH and with middle TTTs... and with end == HT
-console.log("======== BREAK ========")
-main2("THTTTTTTTTTHH") // first two TH and with middle TTTs... and with end == HH
-console.log("======== BREAK ========")
-main2("THTTTTTTTTTT") // first two TH and with middle TTTs... and with end == TT
-console.log("======== BREAK ========")
+
+    // FIRST TWO as TH and With MIDDLE Ts... 
+    console.warn("**** FIRST TWO as TH and With MIDDLE Ts...  ****")
+    main2("THTHH") // first two TH and with middle TTTs... and with end == TH
+    console.log("======== test case end ========")
+    main2("THTTTHT") // first two TH and with middle TTTs... and with end == HT
+    console.log("======== test case end ========")
+    main2("THTTTTTTTTTHH") // first two TH and with middle TTTs... and with end == HH
+    console.log("======== test case end ========")
+    main2("THTTTTTTTTTT") // first two TH and with middle TTTs... and with end == TT
+    console.log("======== test case end ========")
+
+    // FIRST TWO as TH and With MIDDLE Ws... 
+    console.warn("**** FIRST TWO as TH and With MIDDLE Ws...  ****")
+    main2("THWHH") // first two TH and with middle TTTs... and with end == TH
+    console.log("======== test case end ========")
+    main2("THWWWHT") // first two TH and with middle TTTs... and with end == HT
+    console.log("======== test case end ========")
+    main2("THWWWWWWWHH") // first two TH and with middle TTTs... and with end == HH
+    console.log("======== test case end ========")
+    main2("THWWWWWWWTT") // first two TH and with middle TTTs... and with end == TT
+    console.log("======== test case end ========")
+
+
+
 main2("HTTTTTTHT") // first two HT
 
 

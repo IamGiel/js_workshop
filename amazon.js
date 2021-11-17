@@ -532,8 +532,8 @@ console.log("======== test case end ========")
 main2("THTTTTTTTTTT") // first two TH and with middle TTTs... and with end == TT
 console.log("======== test case end ========")
 
-// FIRST TWO as TH and With MIDDLE Ws... 
-console.warn("**** FIRST TWO as TH and With MIDDLE Ws...  ****")
+// FIRST TWO as TH and With MIDDLE Hs... 
+console.warn("**** FIRST TWO as TH and With MIDDLE Hs...  ****")
 main2("THHHH") // first two TH and with middle TTTs... and with end == TH
 console.log("======== test case end ========")
 main2("THHHHHT") // first two TH and with middle TTTs... and with end == HT

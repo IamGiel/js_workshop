@@ -20,7 +20,7 @@ Given nth number of coins, to be considered a "Beautiful Combination" a set of c
     - HHHHHHH
     - TTTTTTTTT
 
-2. Starts with two Heads (HH) and ends with two Tails (TT), and in between should have repeated Ts and repeated Hs example:
+2. Starts with two Heads (HH) and ends with two Tails (TT), and in between should have repeated Ts and repeated Hs wherein Hs comes before Ts, example:
     - HHTTTT
     - HHHHHHHHTT
 

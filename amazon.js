@@ -311,8 +311,8 @@ function main2(s) { // FIRST ..... LAST
     let first_two = s.slice(0, 2);
     let last_two = s.slice(-2);
     let middle_chars = s.slice(2, s.length - 2);
-    // **** middle chars are uniform
-    if (allsame(middle_chars) == true) {
+   
+    if (allsame(middle_chars) == true) {  // **** middle chars are uniform
         console.log("middle characters are all same block: ", s);
 
         if (first_two == "HH") {
@@ -332,26 +332,78 @@ function main2(s) { // FIRST ..... LAST
             console.log("condition first_two = HT: ", s);
             handle_HT_uniformMiddle(first_two, middle_chars, last_two);
         }
-    } else // ***** if middle chars are NOT uniform
-        if (allsame(middle_chars) == false) {
+    } else 
+    if (allsame(middle_chars) == false) { // ***** if middle chars are NOT uniform
+        // HH TH ...HH/TT/HT/TH  HH THTH TT, HH THT TT, HH TH TT, HH HT TT
+        // check numflips for flipping H or T
+        
+        // HANDLE HH and MIXED_MIDDLE and end = ?? HH/HT/TH/TT
+        handle_HH_mixedMiddle(first_two, middle_chars, last_two)
+        // HH HT ...HH/TT/HT/TH
 
-            // console.log(result)
-            // might check for flipping the middle coins to uniform combination
-            // and how the tips (first and end) might mesh with flipping to H or T
-            let midCharObj = reducer(middle_chars);
-            console.log(midCharObj)
-            // if HH ... TT
-            // if HH ... TH
-            // if HH ... HT
-            // if HH ... HH
-            // if TT ... TT
-            // if TT ... TH
-            // if TT ... HT
-            // if TT ... HH
-        }
+        // TT TH ...HH/TT/HT/TH
+        // TT HT ...HH/TT/HT/TH
+
+        // HT TH ...HH/TT/HT/TH
+        // HT HT ...HH/TT/HT/TH
+
+        // TH TH ...HH/TT/HT/TH
+        // TH HT ...HH/TT/HT/TH
+        
+    }
 }
 
 // HELPERS
+function handle_HH_mixedMiddle(hh, mixed_middle, end) {
+    let str = `${hh} ${mixed_middle} ${end}`;
+    console.log(str)
+    let result = `${mixed_middle}${end}`;
+    // console.log(result)
+
+    if(end=="TT"){ // HH TH... TT??
+        console.log("check Ts vs Hs")
+        checkNumHandT(result)
+        // HHHTTTTT 
+        // check first coin H and last coin H
+        // check first coin T and last coin T must be equal to length of string (middle + end)
+        let firstH = result.indexOf("H");
+        let lastH = result.lastIndexOf("H");
+        let firstT = result.indexOf("T");
+        let lastT = result.lastIndexOf("T");
+        let lenth = result.length;
+
+        console.log(`first H: ${firstH}\n last H: ${lastH}\n length: ${lenth}\n firstT: ${firstT}\n lastT: ${lastT}`)
+
+        if((firstH == lastH) && firstH == 0) {
+            console.log(0)
+            return 0;
+        }
+        if((firstH == lastH) && firstH !== 0) {
+            console.log(1)
+            return 1;
+        }
+        if((firstH == 0) && (firstT == (lastH + 1)) && (lastT == (lenth - 1))) {
+            console.log(0)
+            return 0;
+        }
+    }
+    if(end=="HT"){ // HH TH... HT??
+        console.log("check Ts vs Hs")
+        let res = checkNumHandT(result);
+        console.log(res)
+    }
+    if(end=="TH"){ // HH TH... TH??
+        console.log("check Ts vs Hs")
+        let res = checkNumHandT(result);
+        console.log(res)
+    }
+    if(end=="HH"){ // HH TH... HH??
+        console.log("check Ts vs Hs")
+        let res = checkNumHandT(result);
+        console.log(res)
+        return res;
+    }
+}
 function handle_TH_uniformMiddle(th, uniform_middle, end) {
     let result = `${th} ${uniform_middle} ${end}`;
     let combined = [...`${th}${uniform_middle}${end}`];
@@ -452,20 +504,49 @@ function handle_HT_uniformMiddle(ht, uniform_middle, end) {
 
 function handle_HH_uniformMiddle(hh, uniform_middle, end) {
 
-    let result = `${hh} ${uniform_middle} ${end}`;
-    if (hh == end) { // HH TTTTT HH
-        console.log("hh == end: pass!: ", result)
-    }
-    if (hh !== end) { // HH ??? TT / TH / HT
-        console.log(end)
-        if (end == 'TT') {
-            console.log("end == 'TT': pass!: ", result)
+    let middle_T = uniform_middle.indexOf("T") > -1;
+    if (middle_T == true) { // HH TTTT... ??
+        if(end=="TT"){ // HH TTTT... TT??
+            console.log("0 flips")
+            console.log(0)
+            return 0;
         }
-        if (end == 'TH') {
-            console.log("end == 'TH': flip (1) last H to T: ", result)
+        if(end=="HH"){ // HH TTTT... HH??
+            console.log("flip(2) last H to T");
+            console.log(2)
+            return 2; 
         }
-        if (end == 'HT') {
-            console.log("end == 'HT': flip (1) last H to T: ", result)
+        if(end=="TH"){ // HH TTTT... TH??
+            console.log("flip(1) last H to T");
+            console.log(1)
+            return 1; 
+        }
+        if(end=="HT"){ // HH TTTT... HT??
+            console.log("flip(1) last H to T");
+            console.log(1)
+            return 1; 
+        }
+    } else 
+    if(middle_T == false){ // HH HHHHH... ??
+        if(end=="TT"){ // HH HHHHH... TT??
+            console.log("0 flips")
+            console.log(0)
+            return 0;
+        }
+        if(end=="HH"){ // HH HHHHH... HH??
+            console.log("0 flips")
+            console.log(0)
+            return 0;
+        }
+        if(end=="TH"){ // HH HHHHH... TH??
+            console.log("flip(1) last H to T or last T to H");
+            console.log(1)
+            return 1;
+        }
+        if(end=="HT"){ // HH HHHHH... HT??
+            console.log("flip(1) last H to T");
+            console.log(1)
+            return 1;
         }
     }
 }
@@ -481,7 +562,6 @@ function handle_TT_uniformMiddle(TT, uniform_middle, end) {
         return 0;
     }
     if ((TT !== end) && (middle_T == true)) { // TT TTT ... ?? -->  HH / TH / HT
-        // console.log("(TT !== end) && (middle_T == true)") // TT TTT... ??
         if (end == "HT") {
             console.log("TT TTTT -> HT: Flip (1) H to T")
             console.log(1)
@@ -499,7 +579,30 @@ function handle_TT_uniformMiddle(TT, uniform_middle, end) {
         }
     }
     if ((TT !== end) && (middle_T == false)) { // TT HHH ... HH / TH / HT
-
+        if (end == "HT") { // TT HH HT
+            console.log("flip least amount of occurence")
+            let combined = [...`${TT}${uniform_middle}${end}`];
+            let answer = checkNumHandT(combined);
+            console.log(answer)
+        }
+        if (end == "TH") { // TT H TH
+            console.log("flip least amount of occurence")
+            let combined = [...`${TT}${uniform_middle}${end}`];
+            let answer = checkNumHandT(combined);
+            console.log(answer)
+        }
+        if (end == "HH") { // TT H HH
+            console.log("TT TTTT -> HH: Flip (2) TT to HH")
+            console.log(2)
+            return 2;
+        }
+        
+    }
+    if((TT==end) && (middle_T==false)){
+        console.log("flip least amount of occurence")
+        let combined = [...`${TT}${uniform_middle}${end}`];
+        let answer = checkNumHandT(combined);
+        console.log(answer)
     }
 }
 
@@ -533,14 +636,17 @@ function checkNumHandT(combined_string) {
     let numH = testedObj.numH != undefined ? testedObj.numH : testedObj.strLength - testedObj.numT;
     let numT = testedObj.numT != undefined ? testedObj.numT : testedObj.strLength - testedObj.numH;
     console.log(testedObj)
-    let result;
+    let result; // {numT: 3, numH: undefined, strLength: 9}
     if (testedObj.numH && (testedObj.strLength - testedObj.numH < numH)) {
         result = testedObj.strLength - testedObj.numH;
     }
     if (testedObj.numH && (testedObj.strLength - testedObj.numH > numH)) {
         result = testedObj.numH;
     }
-    if (!testedObj.numH) {
+    if (!testedObj.numH && (testedObj.strLength - testedObj.numT > numT)) {
+        result = testedObj.numT;
+    }
+    if (!testedObj.numH && (testedObj.strLength - testedObj.numT < numT)) {
         result = testedObj.strLength - testedObj.numT;
     }
     return result;
@@ -610,6 +716,76 @@ console.log("======== test case end ========")
 
 
 // FIRST TWO as TT and With MIDDLE Hs... 
+console.warn("**** FIRST TWO as TT and With MIDDLE Hs...   ****")
+main2("TTHHHHHHT") // first two TT and with middle Hs and end == HT
+console.log("======== test case end ========")
+main2("TTHHHHHTH") // first two TT and with middle Hs and end == TH
+console.log("======== test case end ========")
+main2("TTHHHHHTT") // first two TT and with middle Hs and end == TT
+console.log("======== test case end ========")
+main2("TTHHHHHHH") // first two TT and with middle Hs and end == HH
+console.log("======== test case end ========")
 
-// FIRST TWO as HH and With MIDDLE Ts... 
+// FIRST TWO as HH and With MIDDLE Ts...
+console.warn("**** FIRST TWO as HH and With MIDDLE Ts...  ****")
+main2("HHTTTTTHT") // first two HH and with middle Hs and end == HT
+console.log("======== test case end ========")
+main2("HHTTTTTTH") // first two HH and with middle Hs and end == TH
+console.log("======== test case end ========")
+main2("HHTTTTTTT") // first two HH and with middle Hs and end == TT
+console.log("======== test case end ========")
+main2("HHTTTTTHH") // first two HH and with middle Hs and end == HH
+console.log("======== test case end ========") 
+
 // FIRST TWO as HH and With MIDDLE Hs... 
+console.warn("**** FIRST TWO as HH and With MIDDLE Hs...  ****")
+main2("HHHHHHHHT") // first two HH and with middle Hs and end == HT
+console.log("======== test case end ========") 
+main2("HHHHHHHTH") // first two HH and with middle Hs and end == TH
+console.log("======== test case end ========") 
+main2("HHHHHHHHH") // first two HH and with middle Hs and end == HH
+console.log("======== test case end ========") 
+main2("HHHHHHHTT") // first two HH and with middle Hs and end == TT
+console.log("======== test case end ========") 
+
+// TEST MIXED MIDDLES
+
+// FIRST TWO as HH and with MIXED MIDDLES...
+// end = HT
+console.warn("**** FIRST TWO as HH and with MIXED MIDDLES...  ****")
+main2("HHHTHT") // first two HH and with mixed middle and end == HT
+console.log("======== test case end ========") 
+main2("HHTTTTTTTTTTTTHHT") // first two HH and with mixed middle and end == HT
+console.log("======== test case end ========") 
+main2("HHTHHT") // first two HH and with mixed middle and end == HT
+console.log("======== test case end ========") 
+
+// end = TH
+main2("HHHTTH") // first two HH and with mixed middle and end == TH
+console.log("======== test case end ========") 
+main2("HHTTTTTTTTTTTTHTH") // first two HH and with mixed middle and end == TH
+console.log("======== test case end ========") 
+main2("HHTHTH") // first two HH and with mixed middle and end == TH
+console.log("======== test case end ========") 
+
+// end = HH
+main2("HHHTHH") // first two HH and with mixed middle and end == TH
+console.log("======== test case end ========") 
+main2("HHTTTTTTTTTTTTHHH") // first two HH and with mixed middle and end == TH
+console.log("======== test case end ========") 
+main2("HHTHHH") // first two HH and with mixed middle and end == TH
+console.log("======== test case end ========") 
+
+
+// end = TT
+console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  IM HERE.... >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+main2("HHHTTT") // first two HH and with mixed middle and end == TH
+console.log("======== test case end ========") 
+main2("HHHHHHTTTTTT") // first two HH and with mixed middle and end == TH
+console.log("======== test case end ========") 
+main2("HHTHTT") // first two HH and with mixed middle and end == TH
+console.log("======== test case end ========") 
+main2("HHTTTTTTTTTTTTHTT") // first two HH and with mixed middle and end == TH
+console.log("======== test case end ========") 
+main2("HHTHTT") // first two HH and with mixed middle and end == TH
+console.log("======== test case end ========") 

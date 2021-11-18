@@ -8,44 +8,6 @@
 // exmaple2 THHTTHH, we need to flip first coin to H, then flip the last two H's to T
 
 
-// MAIN 1
-function run(s) {
-    console.log("test string: ", s)
-    console.log("============")
-    let twoChars = checkFirstTwoChars(s);
-    console.log(twoChars)
-    console.log("numOfT: ", twoChars.numOfT)
-    console.log("============")
-    let uniformity = makeEmUniform(s);
-    console.log("uniformity: ", uniformity);
-    console.log("============")
-    console.log("first and last: ", first_last(s));
-    console.log("============")
-
-    if (first_last(s).same_tip == false) {
-        // twochars.numoft is null go to uniformity
-        if (twoChars.numOfT == null) {
-            console.log("we go to uniformity: ", uniformity)
-            return uniformity;
-        } else {
-            if (twoChars.numOfT < uniformity) {
-                console.log("return num steps: ", twoChars.numOfT)
-            }
-            if (twoChars.numOfT > uniformity) {
-                console.log("return num steps: ", uniformity)
-            }
-            if (twoChars.numOfT == uniformity) {
-                console.log("return num steps: ", uniformity)
-            }
-        }
-    } else {
-        console.log(first_last(s).step)
-        if (first_last(s).step == undefined) {
-            console.log("TESTing")
-        }
-    }
-}
-
 // MAIN 2
 function main2(s) { // FIRST ..... LAST
     let first_two = s.slice(0, 2);

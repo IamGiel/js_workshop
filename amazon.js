@@ -7,21 +7,6 @@
 // in example1, we need to flip the first T to H and the second to last H to T to be considered beautiful combination
 // exmaple2 THHTTHH, we need to flip first coin to H, then flip the last two H's to T
 
-let test_case1 = "THHHHT"; // 2 flips
-let test_case2 = "TTTHHH"; // 3 flips
-let test_case3 = "TTTTTTT"; // 0 flips
-let test_case4 = "HHHHHHH";
-let test_case5 = "TTTTTTH"; // 1 flips
-let test_case6 = "HHHHHHT";
-let test_case7 = "THHHHHT";
-let test_case8 = "HTHHHHT";
-let test_case9 = "HHHHHHTTT";
-let test_case10 = "HHHTTH";
-let test_case11 = "THHHTT";
-let test_case12 = "THHHHTT";
-
-let flips = null;
-
 
 // MAIN 1
 function run(s) {
